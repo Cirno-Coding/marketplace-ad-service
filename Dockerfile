@@ -25,4 +25,4 @@ RUN uv sync --frozen --no-dev
 
 EXPOSE 8000
 
-CMD ["sh", "-c", "/app/.venv/bin/alembic upgrade head && exec /app/.venv/bin/python -m bin.api"]
+CMD ["sh", "-c", "/app/.venv/bin/alembic upgrade head && { /app/.venv/bin/python -m bin.outbox & exec /app/.venv/bin/python -m bin.api; }"]
